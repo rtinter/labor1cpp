@@ -3,7 +3,8 @@
 #include <string>
 #include "labor1.h"
 #include <fstream>
-
+#include <sstream>
+#include <exception>
 
 int main(int argc, char *argv[]) {
 
@@ -51,17 +52,70 @@ int main(int argc, char *argv[]) {
     //Anforderung 9
     std::vector<Person> persons;
 
-    //Anforderung 10
-    std::fstream file("./Text.txt");
+   /* Anforderung 10
+    std::fstream file("/Users/renetinter/CLionProjects/labor1/data.txt");
     std::string line;
+    Person person; // Erstelle eine Instanz von Person
 
-    if(file.is_open()){
-        while(std::getline(file, line)) { // Liest jede Zeile aus der Datei
-            std::cout << line << std::endl; // Gibt die gelesene Zeile aus
+    if (file.is_open()) {
+        while (std::getline(file, line)) {
+            std::istringstream lines(line);
+            std::string key, value;
+            if (std::getline(lines, key, ':')) {
+                lines >> std::ws; // Ignoriere Leerzeichen nach dem Doppelpunkt
+                std::getline(lines, value); // Lies den Rest der Zeile als Wert
+
+                if (key == "Firstname") {
+                    person.firstName = value;
+                } else if (key == "Lastname") {
+                    person.lastName = value;
+                } else if (key == "Birthday") {
+                    person.birthday = value;
+                    persons.emplace_back(person);
+                    person = Person(); // Zurücksetzen für das nächste Objekt
+                }
+            }
         }
-        file.close(); // Schließt die Datei
+        file.close();
     }
-    std::cout << line << std::endl;
+
+    for (const auto& p : persons) {
+        std::cout << "Vorname: " << p.firstName << ", Nachname: " << p.lastName << ", Geburtstag: " << p.birthday << std::endl;
+    }
+
+
+*/
+
+    std::string lines;
+    std::ifstream file;
+    Person person_ptr;
+
+    try {
+        //exception anmelden
+        file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+        file.open("/Users/renetinter/CLionProjects/labor1/data.txt");
+
+        if (!file.is_open()) {
+            throw std::runtime_error("Datei konnte nicht geöffnet werden");
+        }
+
+        // Zeilen aus der Datei lesen und an 'lines' anhängen
+        std::string line;
+        while (std::getline(file, line)) {
+
+
+           // lines += line + "\n"; // Neue Zeile hinzufügen
+        }
+
+        file.close();
+        } catch(std::exception &e){
+            std::cerr << e.what() << std::endl;
+            std::cout << "Datei nicht gefunden" << std::endl;
+        }
+
+    // Ausgeben des Inhalts der Datei
+    std::cout << "Inhalt der Datei:" << std::endl;
+    std::cout << lines << std::endl;
 
     return 0;
 }
