@@ -103,7 +103,6 @@ int main(int argc, char *argv[]) {
         std::string line;
         while (std::getline(file, line)) {
 
-
            // lines += line + "\n"; // Neue Zeile hinzufügen
         }
 
