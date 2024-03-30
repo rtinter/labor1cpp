@@ -1,7 +1,12 @@
+Bernd
+Müller
+22.10.1975
+Sina
+Hansen
+10.2.2001
+Gerda
+Schmitt
+4.5.1954
 Max
 Mustermann
-01.01.1992
-
-Maxi
-Mustermini
-15.15.1995
+31.4.1902
